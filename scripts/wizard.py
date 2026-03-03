@@ -33,13 +33,7 @@ class Wizard:
             self.on_ground=True
 
         if self.on_ground==False:
-            self.nowanim="jump"
-            if self.move_left==True:
-                self.x+=-self.spead
-                self.flip=True
-            if self.move_right==True:
-                self.x+=self.spead
-                self.flip=False
+            self.action_in_air()
         else:
             if self.move_left==True:
                 self.x+=-self.spead
@@ -58,3 +52,12 @@ class Wizard:
         if self.on_ground==True:
             self.nowanim="jump"
             self.y_spead=-22
+    
+    def action_in_air(self):
+        self.nowanim="jump"
+        if self.move_left==True:
+            self.x+=-self.spead
+            self.flip=True
+        if self.move_right==True:
+            self.x+=self.spead
+            self.flip=False
