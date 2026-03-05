@@ -26,9 +26,21 @@ while True:
             if i.key==control.jump:
                 characters[now_indx_character].jump()
             if i.key==control.change_character_right:
+                spawnx=characters[now_indx_character].x
+                spawny=characters[now_indx_character].y
+                spawnleft=characters[now_indx_character].move_left
+                spawnright=characters[now_indx_character].move_right
+                spawnflip=characters[now_indx_character].flip
+                spawnanim=characters[now_indx_character].nowanim
                 now_indx_character+=1
                 if now_indx_character>=len(characters):
                     now_indx_character=0
+                characters[now_indx_character].x=spawnx
+                characters[now_indx_character].y=spawny
+                characters[now_indx_character].move_left=spawnleft
+                characters[now_indx_character].move_right=spawnright
+                characters[now_indx_character].flip=spawnflip
+                characters[now_indx_character].nowanim=spawnanim
             if i.key==control.change_character_left:
                 now_indx_character-=1
                 if now_indx_character<0:
