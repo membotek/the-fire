@@ -1,4 +1,5 @@
 from scripts import util,animation,setings
+import pygame
 class Wizard:
     def __init__(self):
         self.x=0
@@ -20,6 +21,7 @@ class Wizard:
 
     def render(self):
         self.anims[self.nowanim].render((self.x,self.y),self.flip)
+        self.render_boundbox(pygame.display.get_surface())
 
     def update(self):
         self.y_spead+=self.g
@@ -61,3 +63,13 @@ class Wizard:
         if self.move_right==True:
             self.x+=self.spead
             self.flip=False
+    
+    def center_of_boundbox(self):
+        bb=self.anims[self.nowanim].list_of_images[0].get_rect(topleft=(self.x,self.y))
+        centre=bb.center
+        return(centre,bb)
+    def render_boundbox(self,display):
+        cent,bb=self.center_of_boundbox()
+        pygame.draw.rect(display,(255,0,0),(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19),1)
+        boundbox=pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
+        return(boundbox)
