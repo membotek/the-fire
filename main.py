@@ -26,6 +26,7 @@ while True:
             if i.key==control.jump:
                 characters[now_indx_character].jump()
             if i.key==control.change_character_right:
+                spawnrect=characters[now_indx_character].render_boundbox()
                 spawnx=characters[now_indx_character].x
                 spawny=characters[now_indx_character].y
                 spawnleft=characters[now_indx_character].move_left
@@ -41,6 +42,10 @@ while True:
                 characters[now_indx_character].move_right=spawnright
                 characters[now_indx_character].flip=spawnflip
                 characters[now_indx_character].nowanim=spawnanim
+                newbounbox=characters[now_indx_character].render_boundbox()
+                delta=characters[now_indx_character].y-newbounbox.y
+                newbounbox.bottom=spawnrect.bottom
+                characters[now_indx_character].y=newbounbox.y-delta
             if i.key==control.change_character_left:
                 now_indx_character-=1
                 if now_indx_character<0:

@@ -21,7 +21,7 @@ class Wizard:
 
     def render(self):
         self.anims[self.nowanim].render((self.x,self.y),self.flip)
-        self.render_boundbox(pygame.display.get_surface())
+        self.render_boundbox()
 
     def update(self):
         self.y_spead+=self.g
@@ -29,9 +29,9 @@ class Wizard:
         self.y+=self.y_spead
 
         self.on_ground=False
-        if self.y>=setings.SCREAN_HEIGHT-500:
+        if self.render_boundbox().bottom>=setings.SCREAN_HEIGHT:
             self.y_spead=0
-            self.y=setings.SCREAN_HEIGHT-500
+            self.y=setings.SCREAN_HEIGHT-self.render_boundbox().height+self.y-self.render_boundbox().y
             self.on_ground=True
 
         if self.on_ground==False:
@@ -68,8 +68,8 @@ class Wizard:
         bb=self.anims[self.nowanim].list_of_images[0].get_rect(topleft=(self.x,self.y))
         centre=bb.center
         return(centre,bb)
-    def render_boundbox(self,display):
+    def render_boundbox(self):
         cent,bb=self.center_of_boundbox()
-        pygame.draw.rect(display,(255,0,0),(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19),1)
+        pygame.draw.rect(pygame.display.get_surface(),(255,0,0),(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19),1)
         boundbox=pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
         return(boundbox)

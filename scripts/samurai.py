@@ -17,9 +17,10 @@ class Samurai(wizard.Wizard):
             self.x+=self.spead
             self.flip=False
     def jump(self):
+        print(self.y_spead)
         None
-    def render_boundbox(self,display):
+    def render_boundbox(self):
         cent,bb=self.center_of_boundbox()
-        pygame.draw.rect(display,(255,0,0),(cent[0]-bb.width//10+(self.move_right-self.move_left)*10,cent[1]-bb.height//20+15,bb.width//4.7,bb.height//4+30),1)
-        boundbox=pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
+        pygame.draw.rect(pygame.display.get_surface(),(255,0,0),(cent[0]-bb.width//10+(self.move_right-self.move_left)*10,cent[1]-bb.height//20+15,bb.width//4.7,bb.height//4+30),1)
+        boundbox=pygame.Rect(cent[0]-bb.width//10+(self.move_right-self.move_left)*10,cent[1]-bb.height//20+15,bb.width//4.7,bb.height//4+30)
         return(boundbox)
