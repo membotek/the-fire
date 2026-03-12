@@ -7,10 +7,14 @@ class Wizard:
         self.spead=10
         self.nowanim="idle"
         self.flip=True
+        self.attack_timers={
+            "attack1_timer":0
+        }
         self.anims={
             "idle":animation.Animation("Sprites/EVil Wizard 2/Sprites/Idle.png",2,8,8),
             "run":animation.Animation("Sprites/EVil Wizard 2/Sprites/Run.png",2,8,8),
-            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",2,8,2)
+            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",2,8,2),
+            "atack1":animation.Animation("Sprites/EVil Wizard 2/Sprites/Attack1.png",2,8,8)
         }
         self.move_left=False
         self.move_right=False
@@ -47,6 +51,10 @@ class Wizard:
                 self.flip=False
             if self.move_left==True and self.move_right==True or self.move_left==False and self.move_right==False:
                 self.nowanim="idle"
+        for i in self.attack_timers:
+            if  self.attack_timers[i]>0:
+                self.attack_timers[i]-=1
+                self.attack()
 
         self.anims[self.nowanim].update()
 
@@ -73,3 +81,9 @@ class Wizard:
         pygame.draw.rect(pygame.display.get_surface(),(255,0,0),(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19),1)
         boundbox=pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
         return(boundbox)
+    
+    def set_attacktimer(self,time,name_attack):
+        self.attack_timers[name_attack+"_timer"]=time
+
+    def attack(self):
+        None

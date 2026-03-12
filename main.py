@@ -11,6 +11,7 @@ characters=[
     sam
 ]
 now_indx_character=0
+click=False
 while True:
     fps.tick(60)
     display.fill((255,255,255))
@@ -50,6 +51,13 @@ while True:
                 now_indx_character-=1
                 if now_indx_character<0:
                     now_indx_character=len(characters)-1
+        if i.type==pygame.MOUSEBUTTONDOWN:
+            if i.button==1:
+                click=True
+                characters[now_indx_character].set_attacktimer(60,"attack1")
+        elif i.type==pygame.MOUSEBUTTONUP:
+            if i.button==1:
+                click=False
         if i.type==pygame.KEYUP:
             if i.key==control.move_right:
                 characters[now_indx_character].move_right=False
