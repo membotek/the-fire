@@ -26,4 +26,7 @@ class Animation:
             self.display.blit(self.reverse_list_of_images[self.now_index_of_image],(cords))
         else:
             self.display.blit(self.list_of_images[self.now_index_of_image],(cords))
+    def reset(self):
+        print("work")
+        self.now_index_of_image=0
     

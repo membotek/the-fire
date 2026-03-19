@@ -8,6 +8,7 @@ class Samurai(wizard.Wizard):
             "idle":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png",3,4,10),
             "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",3,4,16),
             "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",3,4,16),
+            "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",3,5,7)
         }
     def action_in_air(self):
         if self.move_left==True:
