@@ -72,7 +72,6 @@ class Wizard:
         self.nowanim = "jump"
         self.y_spead = -22
         self.on_ground = False
-        return True
 
     def action_in_air(self):
         if self.now_attack is None:
@@ -111,4 +110,3 @@ class Wizard:
         self.now_attack = "attack1"
         self.nowanim = "attack1"
         self.anims["attack1"].reset()
-        return True
