@@ -11,6 +11,9 @@ class Samurai(wizard.Wizard):
             "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",3,5,7)
         }
     def action_in_air(self):
+        if self.now_attack is not None:
+            return
+
         if self.move_left==True:
             self.x+=-self.spead
             self.flip=True
@@ -18,8 +21,7 @@ class Samurai(wizard.Wizard):
             self.x+=self.spead
             self.flip=False
     def jump(self):
-        print(self.y_spead)
-        None
+        super().jump()
     def render_boundbox(self):
         cent,bb = self.center_of_boundbox()
         pygame.draw.rect(pygame.display.get_surface(),(255,0,0),(cent[0]-bb.width//10+(self.move_right-self.move_left)*10,cent[1]-bb.height//20+15,bb.width//4.7,bb.height//4+30),1)
