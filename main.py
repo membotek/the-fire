@@ -61,9 +61,7 @@ while True:
         if i.type==pygame.MOUSEBUTTONDOWN:
             if i.button==1:
                 click=True
-                characters[now_indx_character].set_attacktimer(characters[now_indx_character].anims["attack1"].time*characters[now_indx_character].anims["attack1"].howmany_images-1,"attack1")
                 characters[now_indx_character].attack1()
-                characters[now_indx_character].now_attack="attack1"
         elif i.type==pygame.MOUSEBUTTONUP:
             if i.button==1:
                 click=False

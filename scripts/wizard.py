@@ -66,19 +66,22 @@ class Wizard:
         self.anims[self.nowanim].update()
 
     def jump(self):
-        if self.on_ground == True:
-            self.nowanim = "jump"
-            self.y_spead = -22
+        if self.on_ground == False or self.now_attack is not None:
+            return False
+
+        self.nowanim = "jump"
+        self.y_spead = -22
+        self.on_ground = False
 
     def action_in_air(self):
         if self.now_attack is None:
             self.nowanim = "jump"
-        if self.move_left:
-            self.x -= self.spead
-            self.flip = True
-        if self.move_right:
-            self.x += self.spead
-            self.flip = False
+            if self.move_left:
+                self.x -= self.spead
+                self.flip = True
+            if self.move_right:
+                self.x += self.spead
+                self.flip = False
 
     def center_of_boundbox(self):
         bb=self.anims[self.nowanim].list_of_images[0].get_rect(topleft=(self.x,self.y))
@@ -97,5 +100,13 @@ class Wizard:
         self.nowanim=name_attack
     
     def attack1(self):
+        if self.on_ground == False or self.now_attack is not None:
+            return False
+
+        self.set_attacktimer(
+            self.anims["attack1"].time * self.anims["attack1"].howmany_images - 1,
+            "attack1"
+        )
+        self.now_attack = "attack1"
         self.nowanim = "attack1"
         self.anims["attack1"].reset()
