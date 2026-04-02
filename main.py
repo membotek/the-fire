@@ -1,23 +1,28 @@
 import pygame
-from scripts import setings,wizard,control,samurai,share
-display=pygame.display.set_mode((0,0),flags=pygame.FULLSCREEN)
+from scripts import setings,wizard,control,samurai,share,mushroom,map
+display=pygame.display.set_mode((0,0),flags=pygame.FULLSCREEN | pygame.DOUBLEBUF)
 setings.SCREAN_WIDTH=display.get_width()
 setings.SCREAN_HEIGHT=display.get_height()
 fps=pygame.time.Clock()
 wiz=wizard.Wizard()
 sam=samurai.Samurai()
+map.initmap()
 characters=[
     wiz,
     sam
 ]
 now_indx_character=0
+enemys=[
+    mushroom.Mushroom(0,0,6)
+]
 click=False
 project_tiles=[]
 share.project_tiles=project_tiles
 while True:
     fps.tick(60)
-    display.fill((255,255,255))
+    print(fps.get_fps())
     events=pygame.event.get()
+    map.render(display)
     for i in events:
         if i.type==pygame.KEYDOWN:
             if i.key==pygame.K_ESCAPE:
@@ -77,4 +82,7 @@ while True:
     for i in project_tiles:
         i.update()
         i.render(display)
+    for i in enemys:
+        i.update()
+        i.render()
     pygame.display.update()

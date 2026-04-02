@@ -2,12 +2,12 @@ from scripts import util,animation,setings,project_tile,share,entity
 import pygame
 class Wizard(entity.Entity):
     def __init__(self):
-        super().__init__(speed=10)
+        super().__init__(speed=10,x=0,y=0)
         self.anims={
-            "idle":animation.Animation("Sprites/EVil Wizard 2/Sprites/Idle.png",2,8,8),
-            "run":animation.Animation("Sprites/EVil Wizard 2/Sprites/Run.png",2,8,8),
-            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",2,8,2),
-            "attack1":animation.Animation("Sprites/EVil Wizard 2/Sprites/Attack1.png",2,8,8)
+            "idle":animation.Animation("Sprites/EVil Wizard 2/Sprites/Idle.png",3,8,8),
+            "run":animation.Animation("Sprites/EVil Wizard 2/Sprites/Run.png",3,8,8),
+            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",3,8,2),
+            "attack1":animation.Animation("Sprites/EVil Wizard 2/Sprites/Attack1.png",3,8,8)
         }
 
 

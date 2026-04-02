@@ -2,9 +2,9 @@ from scripts import util,animation,setings,project_tile,share
 from abc import ABC, abstractmethod
 import pygame
 class Entity(ABC):
-    def __init__(self,speed=10):
-        self.x=0
-        self.y=0
+    def __init__(self,x,y,speed=10):
+        self.x=x
+        self.y=y
         self.speed=speed
         self.nowanim="idle"
         self.flip=True
