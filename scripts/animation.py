@@ -1,9 +1,9 @@
 from scripts import util
 import pygame
 class Animation:
-    def __init__(self,path_for_images,scale,time,howmany_images,color=(0,0,0)):
-        self.list_of_images=util.slicer(path_for_images,scale,howmany_images,False,color)
-        self.reverse_list_of_images=util.slicer(path_for_images,scale,howmany_images,True,color)
+    def __init__(self,path_for_images,scale,time,howmany_images,color=False,convert_alpha=False):
+        self.list_of_images=util.slicer(path_for_images,scale,howmany_images,False,color,convert_alpha)
+        self.reverse_list_of_images=util.slicer(path_for_images,scale,howmany_images,True,color,convert_alpha)
         self.timer=time
         self.time=time
         self.now_index_of_image=0
@@ -27,6 +27,5 @@ class Animation:
         else:
             self.display.blit(self.list_of_images[self.now_index_of_image],(cords))
     def reset(self):
-        print("work")
         self.now_index_of_image=0
     

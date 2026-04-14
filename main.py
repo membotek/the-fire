@@ -20,7 +20,6 @@ project_tiles=[]
 share.project_tiles=project_tiles
 while True:
     fps.tick(60)
-    print(fps.get_fps())
     events=pygame.event.get()
     map.render(display)
     for i in events:

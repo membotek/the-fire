@@ -4,10 +4,10 @@ class Wizard(entity.Entity):
     def __init__(self):
         super().__init__(speed=10,x=0,y=0)
         self.anims={
-            "idle":animation.Animation("Sprites/EVil Wizard 2/Sprites/Idle.png",3,8,8),
-            "run":animation.Animation("Sprites/EVil Wizard 2/Sprites/Run.png",3,8,8),
-            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",3,8,2),
-            "attack1":animation.Animation("Sprites/EVil Wizard 2/Sprites/Attack1.png",3,8,8)
+            "idle":animation.Animation("Sprites/EVil Wizard 2/Sprites/Idle.png",3,8,8,color=(0,0,0)),
+            "run":animation.Animation("Sprites/EVil Wizard 2/Sprites/Run.png",3,8,8,color=(0,0,0)),
+            "jump":animation.Animation("Sprites/EVil Wizard 2/Sprites/Jump.png",3,8,2,color=(0,0,0)),
+            "attack1":animation.Animation("Sprites/EVil Wizard 2/Sprites/Attack1.png",3,8,8,color=(0,0,0))
         }
 
 

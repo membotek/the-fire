@@ -5,10 +5,10 @@ class Samurai(entity.Entity):
     def __init__(self):
         super().__init__(x=0,y=0,speed=12)
         self.anims={
-            "idle":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png",4,4,10),
-            "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16),
-            "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16),
-            "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7)
+            "idle":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png",4,4,10,color=(0,0,0)),
+            "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
+            "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
+            "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0))
         }
     def action_in_air(self):
         if self.now_attack is not None:

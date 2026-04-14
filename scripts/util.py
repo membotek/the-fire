@@ -13,17 +13,23 @@ def debug(msg: str):
 
 # load image and scale(yvelich)
 
-def loadimage(path,scale=1,color=(0,0,0)):
-    image=pygame.image.load(path).convert_alpha()
-    w=image.get_width()
-    h=image.get_height()
-    image=pygame.transform.scale(image,(w*scale,h*scale))
-    image=image.convert_alpha()
-    if color!=False:
+def loadimage(path,scale=1,color=False,convert_alpha=False,autosize=False):
+    image=pygame.image.load(path)
+    if autosize==True:
+        image=autosizze(image)
+    else:
+        w=image.get_width()
+        h=image.get_height()
+        image=pygame.transform.scale(image,(w*scale,h*scale))
+    if convert_alpha==True:
+        image=image.convert_alpha()
+    else:
+        image=image.convert()
+    if color!=False and convert_alpha==False:
         image.set_colorkey((color))
     return(image)
 
-def loadimages(dirpath,scale=1,color=(0,0,0)):
+def loadimages(dirpath,scale=1,color=False,convert_alpha=False):
     images=[]
     filenames=os.listdir(dirpath)
     for i in filenames:
@@ -86,7 +92,7 @@ def slise(path,size=64,nomber=(0,0),scale=1):
     image=loadimage(path,scale)
     subimage=image.subsurface([size*nomber[0]*scale,size*nomber[1]*scale,size*scale,size*scale])
     return(subimage)
-def slicer(path,scale,how_many_images_in_image,flip,colorkey):
+def slicer(path,scale,how_many_images_in_image,flip,colorkey=False,convert_alpha=False):
     image=loadimage(path,scale,colorkey)
     w=image.get_width()//how_many_images_in_image
     h=image.get_height()
@@ -102,3 +108,10 @@ def slicer(path,scale,how_many_images_in_image,flip,colorkey):
             images.append(a)
     
     return(images)
+def autosizze(image):
+    w=image.get_width()
+    h=image.get_height()
+    k=max(setings.SCREAN_WIDTH/w,setings.SCREAN_HEIGHT/h)
+    print(k)
+    image=pygame.transform.scale(image,(w*k,h*k))
+    return(image)
