@@ -21,7 +21,6 @@ share.project_tiles=project_tiles
 while True:
     fps.tick(60)
     events=pygame.event.get()
-    map.render(display)
     for i in events:
         if i.type==pygame.KEYDOWN:
             if i.key==pygame.K_ESCAPE:
@@ -61,9 +60,33 @@ while True:
                 characters[now_indx_character].x = newbounbox.left - deltax
 
             if i.key==control.change_character_left:
+                spawnrect=characters[now_indx_character].get_boundbox()
+                spawnx=characters[now_indx_character].x
+                spawny=characters[now_indx_character].y
+                spawnleft=characters[now_indx_character].move_left
+                spawnright=characters[now_indx_character].move_right
+                spawnflip=characters[now_indx_character].flip
+                spawnanim=characters[now_indx_character].nowanim
+                spawny_speed = characters[now_indx_character].y_speed
+
                 now_indx_character-=1
                 if now_indx_character<0:
                     now_indx_character=len(characters)-1
+                characters[now_indx_character].x=spawnx
+                characters[now_indx_character].y=spawny
+                characters[now_indx_character].move_left=spawnleft
+                characters[now_indx_character].move_right=spawnright
+                characters[now_indx_character].flip=spawnflip
+                characters[now_indx_character].nowanim=spawnanim
+                characters[now_indx_character].y_speed = spawny_speed
+                newbounbox=characters[now_indx_character].get_boundbox()
+                deltax = newbounbox.left -characters[now_indx_character].x
+                deltay = newbounbox.top - characters[now_indx_character].y
+                newbounbox.bottom=spawnrect.bottom
+                newbounbox.centerx = spawnrect.centerx
+                characters[now_indx_character].y = newbounbox.top-deltay
+                characters[now_indx_character].x = newbounbox.left - deltax
+    
         if i.type==pygame.MOUSEBUTTONDOWN:
             if i.button==1:
                 click=True
@@ -77,6 +100,14 @@ while True:
             if i.key==control.move_left:
                 characters[now_indx_character].move_left=False
     characters[now_indx_character].update()
+    centre = characters[now_indx_character].center_of_boundbox()[0]
+    share.camera[0] = centre[0] - setings.SCREAN_WIDTH // 2
+    share.camera[1] += (centre[1] - setings.SCREAN_HEIGHT // 2) * 0.07
+    if share.camera[0] < 0:
+        share.camera[0] = 0
+    if share.camera[1] > characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95:
+        share.camera[1] = characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95
+    map.render(display)
     characters[now_indx_character].render()
     for i in project_tiles:
         i.update()

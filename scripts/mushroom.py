@@ -1,4 +1,4 @@
-from scripts import enemy,animation,util
+from scripts import enemy,animation,util,share
 import pygame
 
 class Mushroom(enemy.Enemy):
@@ -18,9 +18,9 @@ class Mushroom(enemy.Enemy):
         self.on_ground = False
     def get_boundbox(self):
         cent,bb=self.center_of_boundbox()
-        pygame.draw.rect(pygame.display.get_surface(),(255,0,0),(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19),1)
-        boundbox=pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
-        return(boundbox)
+        world_rect = pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
+        pygame.draw.rect(pygame.display.get_surface(),(255,0,0),share.apply_camera_rect(world_rect),1)
+        return(world_rect)
     
     def ai(self):
         None

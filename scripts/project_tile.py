@@ -1,4 +1,4 @@
-from scripts import util,share
+from scripts import util, share
 import pygame
 class ProjectTile:
     def __init__(self,image_path,x,y,w,h,speed_x,speed_y,time,scale):
@@ -17,4 +17,4 @@ class ProjectTile:
         if self.t<=0:
             share.project_tiles.remove(self)
     def render(self,screan):
-        screan.blit(self.image,(self.x,self.y))
+        screan.blit(self.image, share.apply_camera((self.x, self.y)))

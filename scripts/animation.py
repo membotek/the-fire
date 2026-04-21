@@ -1,4 +1,4 @@
-from scripts import util
+from scripts import util, share
 import pygame
 class Animation:
     def __init__(self,path_for_images,scale,time,howmany_images,color=False,convert_alpha=False):
@@ -22,10 +22,11 @@ class Animation:
         
         :param cords: sorry we can't place in constructor
         '''
-        if flip==True:
-            self.display.blit(self.reverse_list_of_images[self.now_index_of_image],(cords))
+        screen_pos = share.apply_camera(cords)
+        if flip:
+            self.display.blit(self.reverse_list_of_images[self.now_index_of_image], screen_pos)
         else:
-            self.display.blit(self.list_of_images[self.now_index_of_image],(cords))
+            self.display.blit(self.list_of_images[self.now_index_of_image], screen_pos)
     def reset(self):
         self.now_index_of_image=0
     
