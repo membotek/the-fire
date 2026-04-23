@@ -8,8 +8,14 @@ class Samurai(entity.Entity):
             "idle":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/IDLE.png",4,4,10,color=(0,0,0)),
             "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
             "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
-            "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0))
+            "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0)),
+            "run_attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN_ATTACK.png",4,4,13,color=(0,0,0)),
         }
+        self.anims["run_attack1"].list_of_images=[pygame.transform.scale(list_of_images.subsurface(list_of_images.get_bounding_rect()),(1028//96,1028//96)) for list_of_images in self.anims["run_attack1"].list_of_images]
+    def update(self):
+        super().update()
+        if self.move_left==True or self.move_right==True:
+            self.nowanim=("run_attack1" if self.now_attack=="attack1" else "run")
     def action_in_air(self):
         if self.now_attack is not None:
             return

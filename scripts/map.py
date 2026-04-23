@@ -31,9 +31,10 @@ def render(display):
         for y in range(start_y2, int(cam_y2 + H + bg2_h), bg2_h):
             display.blit(background2, (x - cam_x2, y - cam_y2))
     
-    display.blit(image, share.apply_camera((0, 0)))
+    display.blit(image, share.apply_camera((0,setings.SCREAN_HEIGHT-image.get_height())))
 def initmap():
     global image,background1,background2
     background1=util.loadimage("Sprites/GothicVania-town-files/GothicVania-town-files/PNG/environment/layers/background.png",4.69,autosize=True)
     background2=util.loadimage("Sprites/GothicVania-town-files/GothicVania-town-files/PNG/environment/layers/middleground.png",4.69,convert_alpha=True,autosize=True)
-    image=util.loadimage("blood_city.png",1.69,convert_alpha=True,)
+    image=util.loadimage("blood_city.png",3.8,convert_alpha=True)
+    image=image.subsurface(image.get_bounding_rect())
