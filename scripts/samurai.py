@@ -9,9 +9,8 @@ class Samurai(entity.Entity):
             "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
             "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
             "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0)),
-            "run_attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN_ATTACK.png",4,4,13,color=(0,0,0)),
+            "run_attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN_ATTACK.png",4,4,3,color=(0,0,0)),
         }
-        self.anims["run_attack1"].list_of_images=[pygame.transform.scale(list_of_images.subsurface(list_of_images.get_bounding_rect()),(1028//96,1028//96)) for list_of_images in self.anims["run_attack1"].list_of_images]
     def update(self):
         super().update()
         if self.move_left==True or self.move_right==True:
@@ -35,4 +34,22 @@ class Samurai(entity.Entity):
         return(world_rect)
     
     def attack1(self):
-        super().attack1()
+        if self.on_ground == False or self.now_attack is not None:
+            return False
+
+        if self.move_left==self.move_right==False:
+            self.set_attacktimer(
+                self.anims["attack1"].time * self.anims["attack1"].howmany_images - 1,
+                "attack1"
+            )         
+            self.now_attack = "attack1"
+            self.nowanim = "attack1"
+            self.anims["attack1"].reset()
+        else:
+            self.set_attacktimer(
+                self.anims["run_attack1"].time * self.anims["run_attack1"].howmany_images//2 - 1,
+                "run_attack1"
+            )         
+            self.now_attack = "attack1"
+            self.nowanim = "run_attack1"
+            self.anims["run_attack1"].reset()

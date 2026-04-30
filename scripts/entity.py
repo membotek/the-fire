@@ -10,7 +10,8 @@ class Entity(ABC):
         self.flip=True
         self.now_attack=None
         self.attack_timers={
-            "attack1_timer":0
+            "attack1_timer":0,
+            "run_attack_timer":0
         }
         self.anims={
             
@@ -40,7 +41,7 @@ class Entity(ABC):
         if self.on_ground == False:
             self.action_in_air()
         else:
-            if self.now_attack is None:
+            if self.now_attack is None or self.nowanim == "run_attack1":
                 if self.move_left:
                     self.x -= self.speed
                     self.nowanim = "run"
