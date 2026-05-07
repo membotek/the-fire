@@ -9,6 +9,7 @@ class Samurai(entity.Entity):
             "run":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
             "jump":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN.png",4,4,16,color=(0,0,0)),
             "attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0)),
+            "attack2":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/ATTACK 1.png",4,5,7,color=(0,0,0)),
             "run_attack1":animation.Animation("Sprites/FREE_Samurai 2D Pixel Art v1.2/Sprites/RUN_ATTACK.png",4,4,3,color=(0,0,0)),
         }
     def update(self):

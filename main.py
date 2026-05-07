@@ -91,8 +91,13 @@ while True:
             if i.button==1:
                 click=True
                 characters[now_indx_character].attack1()
+            if i.button==3:
+                click=True
+                characters[now_indx_character].attack2()
         elif i.type==pygame.MOUSEBUTTONUP:
             if i.button==1:
+                click=False
+            if i.button==3:
                 click=False
         if i.type==pygame.KEYUP:
             if i.key==control.move_right:
@@ -109,6 +114,7 @@ while True:
         share.camera[1] = characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95
     map.render(display)
     characters[now_indx_character].render()
+    pygame.draw.line(display,(255,0,0),(0,setings.SCREAN_HEIGHT-share.camera[1]),(setings.SCREAN_WIDTH,setings.SCREAN_HEIGHT-share.camera[1]),5)
     for i in project_tiles:
         i.update()
         i.render(display)

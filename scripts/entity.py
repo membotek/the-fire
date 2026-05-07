@@ -11,6 +11,7 @@ class Entity(ABC):
         self.now_attack=None
         self.attack_timers={
             "attack1_timer":0,
+            "attack2_timer":0,
             "run_attack_timer":0
         }
         self.anims={
@@ -103,3 +104,5 @@ class Entity(ABC):
         self.now_attack = "attack1"
         self.nowanim = "attack1"
         self.anims["attack1"].reset()
+    def attack2(self):
+        None
