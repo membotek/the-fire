@@ -13,8 +13,14 @@ characters=[
 ]
 now_indx_character=0
 enemys=[
-    mushroom.Mushroom(0,0,6)
+    mushroom.Mushroom(0,0,6),
+    mushroom.Mushroom(100,0,6),
+    mushroom.Mushroom(200,0,6),
+    mushroom.Mushroom(300,0,6),
+    mushroom.Mushroom(400,0,6),
+    mushroom.Mushroom(500,0,6)
 ]
+share.enemys=enemys
 click=False
 project_tiles=[]
 share.project_tiles=project_tiles
@@ -107,11 +113,17 @@ while True:
     characters[now_indx_character].update()
     centre = characters[now_indx_character].center_of_boundbox()[0]
     share.camera[0] = centre[0] - setings.SCREAN_WIDTH // 2
-    share.camera[1] += (centre[1] - setings.SCREAN_HEIGHT // 2) * 0.07
+    share.camera[1] += ((centre[1] - setings.SCREAN_HEIGHT // 2)-share.camera[1]) * 0.07
     if share.camera[0] < 0:
         share.camera[0] = 0
-    if share.camera[1] > characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95:
-        share.camera[1] = characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95
+    # if characters[now_indx_character].on_ground==True:
+    #     if share.camera[1] > characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*1:
+    #         share.camera[1] = characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*1
+    # else:
+    #     if share.camera[1] > characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95:
+    #         share.camera[1] = characters[now_indx_character].get_boundbox().bottom - setings.SCREAN_HEIGHT*0.95
+    if share.camera[1] > 0:
+        share.camera[1] = 0
     map.render(display)
     characters[now_indx_character].render()
     pygame.draw.line(display,(255,0,0),(0,setings.SCREAN_HEIGHT-share.camera[1]),(setings.SCREAN_WIDTH,setings.SCREAN_HEIGHT-share.camera[1]),5)
