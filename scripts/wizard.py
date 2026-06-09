@@ -25,10 +25,11 @@ class Wizard(entity.Entity):
         world_rect = pygame.Rect(cent[0]-bb.width//10,cent[1]-bb.height//20+5,bb.width//4.7,bb.height//4-19)
         pygame.draw.rect(pygame.display.get_surface(),(255,0,0),share.apply_camera_rect(world_rect),1)
         return(world_rect)
-    
+    def take_hit(self):
+        pass
     def attack1(self):
         super().attack1()
-        a=project_tile.ProjectTile('Sprites/Projecttiles/fireballs/Fireball_68x9.png',self.x+10 if self.flip==True else self.x-20+self.center_of_boundbox()[1].width,self.y-100,40,40,0,12,0,self.attack_timers["attack1_timer"],3,10,color=(0,0,0),convert_alpha=True,rotate=90,die_on_the_ground=True)
+        a=project_tile.ProjectTile('Sprites/Projecttiles/fireballs/Fireball_68x9.png',self.x+10 if self.flip==True else self.x-20+self.center_of_boundbox()[1].width,self.y-100,40,40,0,12,0,self.attack_timers["attack1_timer"],3,10,color=(0,0,0),convert_alpha=True,rotate=90,die_on_the_ground=True,damage_multiplier=0.4)
         share.project_tiles.extend([a])
     def attack2(self):
         if self.on_ground == False or self.now_attack is not None:
@@ -52,6 +53,7 @@ class Wizard(entity.Entity):
             speed_x=15 if self.flip==False else -15,
             speed_y=3,
             scale=0.3,
-            howmany_images=1
+            howmany_images=1,
+            damage_multiplier=0.1,
         )
         share.project_tiles.extend([a])

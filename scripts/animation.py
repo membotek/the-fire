@@ -1,12 +1,13 @@
 from scripts import util, share
 import pygame
 class Animation:
-    def __init__(self,path_for_images,scale,time,howmany_images,color=False,convert_alpha=False):
+    def __init__(self,path_for_images,scale,time,howmany_images,color=False,convert_alpha=False,repit=True):
         self.list_of_images=util.slicer(path_for_images,scale,howmany_images,False,color,convert_alpha)
         self.reverse_list_of_images=util.slicer(path_for_images,scale,howmany_images,True,color,convert_alpha)
         self.timer=time
         self.time=time
         self.now_index_of_image=0
+        self.repit=repit
         self.howmany_images=howmany_images
         self.display=pygame.display.get_surface()
     def update(self):
@@ -14,7 +15,10 @@ class Animation:
         if self.timer<=0:
             self.now_index_of_image+=1
             if self.now_index_of_image>=self.howmany_images:
-                self.now_index_of_image=0
+                if self.repit:
+                    self.now_index_of_image=0
+                else:
+                    self.now_index_of_image=self.howmany_images-1
             self.timer=self.time
     def render(self,cords,flip):
         '''

@@ -72,19 +72,61 @@ class Move_to_state:
         if abs(self.mushroom.goal.x-self.mushroom.x)<10:
             self.mushroom.move_left=False
             self.mushroom.move_right=False
+class Take_hit_state:
+    def __init__(self,mushroom):
+        self.mushroom=mushroom  
+        self.enter()
+    def enter(self):
+        self.mushroom.nowanim="take hit"
+        self.mushroom.anims["take hit"].reset()
+        self.wait_time=self.mushroom.anims["take hit"].time*self.mushroom.anims["take hit"].howmany_images
+        print("take hit")
+    def update(self):
+        self.mushroom.nowanim="take hit"
+        self.mushroom.y_speed=0
+        self.mushroom.anims["take hit"].update()
+        self.wait_time-=1
+        if self.wait_time<=0:
+            self.mushroom.state=Idle_state(self.mushroom)
+class Death_state:
+    def __init__(self,mushroom):
+        self.mushroom=mushroom  
+        self.enter()
+    def enter(self):
+        self.mushroom.nowanim="death"
+        self.mushroom.y_speed=0
+        self.wait_time=self.mushroom.anims["death"].time*self.mushroom.anims["death"].howmany_images+35
+        print("death")
+    def update(self):
+        self.wait_time-=1
+        self.mushroom.anims["death"].update()
+        if self.wait_time<=0:
+            share.enemys.remove(self.mushroom)
 class Mushroom(enemy.Enemy):
     def __init__(self, x, y, speed=6):
         super().__init__(x, y, speed)
         self.anims={
             "idle":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Idle.png",3.3,8,4,color=(0,0,0)),
             "run":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Run.png",3.3,8,8,color=(0,0,0)),
-            "jump":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Idle.png",3.3,8,4,color=(0,0,0))
+            "jump":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Idle.png",3.3,8,4,color=(0,0,0)),
+            "take hit":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Take Hit.png",3.3,6,4,color=(0,0,0),repit=False),
+            "death":animation.Animation("Sprites/Monsters_Creatures_Fantasy/Mushroom/Death.png",3.3,10,4,color=(0,0,0),repit=False)
         }
         self.state=Idle_state(self)
         self.rage=0
+        self.sheald=1
     def update(self):
+        if self.state.__class__!=Take_hit_state and self.state.__class__!=Death_state:
+            entity.Entity.update(self)
         self.state.update()
-        entity.Entity.update(self)
+        
+
+    def take_hit(self):
+        if self.hp>0:
+            self.state=Take_hit_state(self)
+        elif self.hp<=0:
+            if self.state.__class__!=Death_state:
+                self.state=Death_state(self)
     def jump(self):
         if self.on_ground == False or self.now_attack is not None:
             return False

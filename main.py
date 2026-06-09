@@ -36,7 +36,7 @@ while True:
             if i.key==control.move_left:
                 characters[now_indx_character].move_left=True
             if i.key==control.jump:
-                characters[now_indx_character].jump()
+                characters[now_indx_character].jump()                
             if i.key==control.change_character_right:
                 spawnrect=characters[now_indx_character].get_boundbox()
                 spawnx=characters[now_indx_character].x

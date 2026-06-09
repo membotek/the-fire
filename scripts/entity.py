@@ -2,10 +2,12 @@ from scripts import util,animation,setings,project_tile,share
 from abc import ABC, abstractmethod
 import pygame
 class Entity(ABC):
-    def __init__(self,x,y,speed=10):
+    def __init__(self,x,y,speed=10,sheald=1,hp=100):
         self.x=x
         self.y=y
         self.speed=speed
+        self.sheald=sheald # Damage multiplier, 1 means normal damage, 0.5 means half damage, etc. Smart AI
+        self.hp=hp
         self.nowanim="idle"
         self.flip=True
         self.now_attack=None
@@ -92,7 +94,9 @@ class Entity(ABC):
 
     def attack(self,name_attack):
         self.nowanim=name_attack
-    
+    @abstractmethod
+    def take_hit(self):
+        pass
     def attack1(self):
         if self.on_ground == False or self.now_attack is not None:
             return False
